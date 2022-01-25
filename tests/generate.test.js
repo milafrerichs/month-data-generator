@@ -54,12 +54,18 @@ describe('#generateData', () => {
     expect(result.d).toBeLessThanOrEqual(6)
   })
 
-  it('for a given month there is only one max', () => {
+  it.each([
+    {min: 1, mx: 4},
+    {min: 2, mx: 5},
+    {min: 5, mx: 24},
+    {min: 5, mx: 8},
+    {min: 10, mx: 19},
+  ])('for a given month there is only one max $min $mx', ({min, mx}) => {
     let amount = 1;
     let options = {
       names: ['A', 'B', 'C'],
       amount,
-      minMaxData: [{min: 1, max: 2, name: "B"}],
+      minMaxData: [{min, max: mx, name: "B"}],
     }
     let data = generateData(options);
 
@@ -70,12 +76,18 @@ describe('#generateData', () => {
 
     expect(result.length).toEqual(1)
   })
-  it('for a given month there is only one min', () => {
+  it.each([
+    {min: 1, mx: 4},
+    {min: 2, mx: 5},
+    {min: 5, mx: 24},
+    {min: 5, mx: 8},
+    {min: 10, mx: 19},
+  ])('for a given month there is only one min min: $min max: $mx', ({min, mx}) => {
     let amount = 1;
     let options = {
       names: ['A', 'B', 'C'],
       amount,
-      minMaxData: [{min: 1, max: 2, name: "B"}],
+      minMaxData: [{min, max: mx, name: "B"}],
     }
     let data = generateData(options);
 
